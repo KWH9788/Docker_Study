@@ -1,0 +1,8 @@
+FROM node:18.13.0-alpine
+
+WORKDIR /usr/scp/app
+COPY package*.json ./
+RUN npm install --only=doproduction
+COPY ./ ./
+COPY ./videos ./videos
+CMD npm start

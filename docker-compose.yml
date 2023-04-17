@@ -1,0 +1,31 @@
+version: '3'
+services:
+
+  azure-storage:
+    image: azure-storage
+    build:
+      context: ./azure-storage
+      dockerfile: Dockerfile
+    container_name: azure-storage
+    ports:
+      - "4000:80"
+    environment:
+      - PORT=80
+      - STORAGE_ACCOUNT_NAME=kwh9788
+      - STORAGE_ACCESS_KEY=53x+UO22NRKud2pdKHssB/0/GYGTqsojgZNPfDnqXb5+/DnVyC0kgqoyeBWMVE2A/2FQIKsP0Fo4+AStjOPNFg==
+    restart: "no"
+
+
+  my-new-project:
+    image: my-new-project
+    build:
+      context: ./my-new-project
+      dockerfile: Dockerfile
+    container_name: my-new-project
+    ports:
+      - "4001:80"
+    environment:
+      - PORT=80
+      - AZURE_STORAGE_HOST=azure-storage
+      - AZURE_STORAGE_PORT=80
+    restart: "no"
